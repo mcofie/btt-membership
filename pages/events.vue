@@ -16,15 +16,36 @@
       />
     </div>
 
-    <div class="grid grid-cols-4 gap-4 mt-7">
-      <UCard class="w-full h-[220px]" v-for="i in 12">
-
+    <div class="grid grid-cols-4 gap-4 mt-7" v-if="!isPending">
+      <UCard class="w-full h-[220px]" v-for="event in evnts">
+        <p class="text-lg font-medium">{{ event.name }}</p>
       </UCard>
     </div>
+    <Loader v-else/>
   </div>
 </template>
 
 <script lang="ts" setup>
+const supabase = useSupabaseClient()
+const evnts = ref([])
+const isPending = ref(true)
+
+const getAllEvents = async () => {
+  let {data: events, error} = await supabase
+      .from('events')
+      .select('*')
+  evnts.value = events
+}
+
+onMounted(() => {
+  isPending.value = true
+  getAllEvents().then(data => {
+    isPending.value = false
+  }).catch(error => {
+    isPending.value = false
+  })
+})
+
 definePageMeta({
   layout: 'main'
 })

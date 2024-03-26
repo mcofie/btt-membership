@@ -17,7 +17,7 @@
           <NuxtLink to="/">
             <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
                        :popper="{ placement: 'bottom-start' }">
-              <UAvatar src="https://avatars.githubusercontent.com/u/739984?v=4"/>
+              <UAvatar :src="data.user"/>
 
               <template #account="{ item }">
                 <div class="text-left">
@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <div class="w-4/6 mx-auto">
+    <div class="w-4/6 mx-auto min-h-lvh	">
       <slot/>
     </div>
 
@@ -54,6 +54,11 @@
 </template>
 
 <script lang="ts" setup>
+const supabase = useSupabaseClient()
+
+const {data} = await supabase.auth.getSession()
+// data.user?.email
+// data.user?.iden
 
 const items = [
   [{

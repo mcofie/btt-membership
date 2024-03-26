@@ -23,21 +23,10 @@ const email = ref('')
 const password = ref('')
 
 const signInWithOtp = async () => {
-  // const {data,error} = await supabase.auth.signUp({
-  //   email: email.value,
-  //   password: password.value
-  // })
-  // if (error) console.log(error)
-  // console.log(data)
 
   await supabase.auth.signInWithOAuth({
     provider: 'google',
   })
-
-
-  // console.log(data)
-  // console.log(error)
-
 }
 </script>
 

@@ -4,6 +4,10 @@ export default defineNuxtConfig({
     modules: ['@nuxt/ui', '@nuxtjs/tailwindcss', '@nuxtjs/supabase'],
     supabase: {
         // Options
+        // Remove or comment out the auth configuration
+        auth: {
+          // Auth configuration options
+        }
     },
     css: ['~/assets/css/main.css'],
     postcss: {

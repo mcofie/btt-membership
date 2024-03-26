@@ -17,20 +17,45 @@
         </UDropdown>
       </div>
 
-      <div class="grid grid-cols-3 gap-4 mt-5">
-        <NuxtLink v-for="i in 12" :to="`/perks/${i}`">
+      <div class="grid grid-cols-3 gap-4 mt-5" v-if="!isPerksPending">
+        <NuxtLink v-for="(perk,index) in prks" :to="`/perks/${perk.id}`">
           <UCard class="w-full h-[220px]">
-
+            <p>{{ perk.product_name }}</p>
           </UCard>
         </NuxtLink>
+      </div>
+      <div v-else>
+        <div class="grid grid-cols-3 gap-4 mt-5">
+          <USkeleton class="h-[250px]" v-for="i in 12"/>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+const supabase = useSupabaseClient()
+const isPerksPending = ref(true)
+const prks = ref([])
+
 definePageMeta({
   layout: 'main'
+})
+
+const getAllPerks = async () => {
+  let {data: perks, error} = await supabase
+      .from('perks')
+      .select('*')
+  prks.value = perks
+}
+
+onMounted(() => {
+  isPerksPending.value = true
+  getAllPerks().then(data => {
+    isPerksPending.value = false
+  }).catch(error => {
+    isPerksPending.value = false
+  })
 })
 
 const items = [
