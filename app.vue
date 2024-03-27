@@ -5,6 +5,6 @@
 </template>
 <style scoped>
 div {
-  font-family: Roboto, sans-serif;
+  font-family: Exo, sans-serif;
 }
 </style>

@@ -17,7 +17,7 @@
           <NuxtLink to="/">
             <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
                        :popper="{ placement: 'bottom-start' }">
-              <UAvatar :src="data.user"/>
+              <UAvatar :src="userDetails.user_metadata.avatar_url ? userDetails.user_metadata.avatar_url : ''"/>
 
               <template #account="{ item }">
                 <div class="text-left">
@@ -25,12 +25,12 @@
                     Signed in as
                   </p>
                   <p class="truncate font-medium text-gray-900 dark:text-white">
-                    {{ item.label }}
+                    {{ userDetails.email }}
                   </p>
                 </div>
               </template>
 
-              <template #item="{ item }">
+              <template #item="{ item }" @click="signOut()">
                 <span class="truncate">{{ item.label }}</span>
 
                 <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"/>
@@ -46,7 +46,8 @@
     </div>
 
     <div class="flex flex-row w-4/6 mx-auto mt-5 mb-2">
-      <div class="border-gray-300 bg-gray-50 border text-gray-500 text-sm p-5 w-full rounded-lg flex flex-row justify-between items-center">
+      <div
+          class="border-gray-300 bg-gray-50 border text-gray-500 text-sm p-5 w-full rounded-lg flex flex-row justify-between items-center">
         <div>
           <p>Black Tech Talent Membership</p>
           <small> &copy; 2024 </small>
@@ -70,10 +71,19 @@
 
 <script lang="ts" setup>
 const supabase = useSupabaseClient()
-
+const userDetails = ref({})
 const {data} = await supabase.auth.getSession()
-// data.user?.email
-// data.user?.iden
+
+
+onMounted(async () => {
+  const {data: {user}} = await supabase.auth.getUser()
+  userDetails.value = user
+  console.log(user)
+})
+
+const signOut = async () => {
+  const {error} = await supabase.auth.signOut()
+}
 
 const items = [
   [{
