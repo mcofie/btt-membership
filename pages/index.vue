@@ -1,8 +1,15 @@
 <template>
   <div>
     <div class="flex flex-row">
-      <div class="bg-yellow-200 h-[400px] w-full rounded-lg">
+      <div class="bg-yellow-200 h-[400px] w-full rounded-2xl">
+        <div class="p-5 flex flex-col">
+          <h2 class="text-4xl font-bold">So glad you decided to join our fam.</h2>
+          <p>Your presence is super important to us.
+            #1 Community of Black Technologists</p>
+        </div>
+        <div>
 
+        </div>
       </div>
     </div>
 
@@ -11,9 +18,9 @@
 
       </div>
       <p class="w-1/2 p-5 text-2xl">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Massa vitae tortor condimentum lacinia quis vel. Mi sit amet mauris commodo quis imperdiet. In est
-        ante in nibh mauris cursus. Enim ut tellus elementum sagittis.
+        Black Tech Talent aims to increase the representation of Black technologists in both corporate careers and
+        entrepreneurship by curating a pipeline of job opportunities, education, community and culturally specific
+        content.
       </p>
     </div>
 

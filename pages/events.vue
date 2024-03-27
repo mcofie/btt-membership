@@ -1,18 +1,18 @@
 <template>
   <div class="w-full">
-    <div class="w-2/4 flex flex-row my-2 space-x-3">
-      <USelect
-          color="gray"
-          variant="outline"
-          size="md"
-          :options="['United States', 'Canada', 'Mexico']"
-      />
+    <div class="w-2/4 flex flex-row my-2 items-center space-x-4">
+      <USelectMenu class="w-1/3"
+                   color="gray"
+                   v-model="year"
+                   size="md"
+                   :options="['2023', '2024', '2025']"/>
 
-      <USelect
+      <USelectMenu
           color="gray"
-          variant="outline"
           size="md"
-          :options="['United States', 'Canada', 'Mexico']"
+          class="w-1/3"
+          v-model="month"
+          :options="['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
       />
     </div>
 
@@ -29,6 +29,9 @@
 const supabase = useSupabaseClient()
 const evnts = ref([])
 const isPending = ref(true)
+const year = ref('2024')
+const month = ref('March')
+
 
 const getAllEvents = async () => {
   let {data: events, error} = await supabase

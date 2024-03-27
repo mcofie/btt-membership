@@ -1,17 +1,12 @@
 <template>
-  <div>
-    <button @click="signInWithOtp">
-      Sign In with E-Mail
-    </button>
-    <input
-        v-model="email"
-        type="email"
-    />
+  <div class="grid grid-cols-4 justify-center">
+    <div class="w-full flex justify-center h-[100px] bg-gray-300">
+      <button @click="signInWithOtp">
+        Sign In with Google
+        <UIcon name="i-mdi-aws"/>
 
-    <input
-        v-model="password"
-        type="text"
-    />
+      </button>
+    </div>
   </div>
 </template>
 

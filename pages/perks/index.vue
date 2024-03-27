@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-row">
-      <div class="bg-blue-200 h-[400px] w-full rounded-lg">
+      <div class="bg-blue-200 h-[400px] w-full rounded-2xl">
 
       </div>
     </div>
