@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="flex flex-row">
-      <div class="bg-blue-200 h-[400px] w-full rounded-2xl">
-
+      <div class="bg-blue-200 h-[400px] w-full flex items-center rounded-2xl justify-center">
+        <div class="p-5 flex flex-col items-center justify-center align-middle">
+          <h2 class="text-5xl font-bold">Save 15% On all Hoodies</h2>
+          <p class="my-2">Use code <span class="font-bold">‘Hoodie15’</span> at Checkout</p>
+        </div>
       </div>
     </div>
 

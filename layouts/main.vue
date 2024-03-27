@@ -10,10 +10,10 @@
         </div>
 
         <div class="flex flex-row space-x-6 items-center">
-          <NuxtLink to="/events" active-class="text-blue-400">Events</NuxtLink>
-          <NuxtLink to="/resources" active-class="text-blue-400">Resources</NuxtLink>
-          <NuxtLink to="/perks" active-class="text-blue-400">Perks</NuxtLink>
-          <NuxtLink to="/co-working-spaces" active-class="text-blue-400">Co Working Space</NuxtLink>
+          <NuxtLink to="/events" active-class="text-blue-700 font-medium">Events</NuxtLink>
+          <NuxtLink to="/resources" active-class="text-blue-700 font-medium">Resources</NuxtLink>
+          <NuxtLink to="/perks" active-class="text-blue-700 font-medium">Perks</NuxtLink>
+          <NuxtLink to="/co-working-spaces" active-class="text-blue-700 font-medium">Co Working Space</NuxtLink>
           <NuxtLink to="/">
             <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
                        :popper="{ placement: 'bottom-start' }">
@@ -45,9 +45,24 @@
       <slot/>
     </div>
 
-    <div class="flex flex-row w-4/6 mx-auto mt-5">
-      <div class="border-gray-200 border h-[100px] w-full rounded-lg">
+    <div class="flex flex-row w-4/6 mx-auto mt-5 mb-2">
+      <div class="border-gray-300 bg-gray-50 border text-gray-500 text-sm p-5 w-full rounded-lg flex flex-row justify-between items-center">
+        <div>
+          <p>Black Tech Talent Membership</p>
+          <small> &copy; 2024 </small>
+        </div>
 
+        <div class="flex flex-row space-x-4 w-1/2 justify-center mx-auto">
+          <UIcon name="i-fa6-brands-facebook" dynamic class="text-xl"/>
+          <UIcon name="i-fa6-brands-instagram" dynamic class="text-xl"/>
+          <UIcon name="i-fa6-brands-twitter" dynamic class="text-xl"/>
+          <UIcon name="i-fa6-brands-linkedin" dynamic class="text-xl"/>
+        </div>
+
+        <div>
+          <p>support@blacktechtalent.org</p>
+          <p>+1 93 0393 908 84</p>
+        </div>
       </div>
     </div>
   </div>
