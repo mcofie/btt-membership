@@ -16,9 +16,19 @@
       />
     </div>
 
-    <div class="grid grid-cols-4 gap-4 mt-7" v-if="!isPending">
-      <UCard class="w-full h-[220px]" v-for="event in evnts">
-        <p class="text-lg font-medium">{{ event.name }}</p>
+    <div class="grid grid-cols-2 gap-4 mt-7" v-if="!isPending">
+      <UCard class="w-full flex flex-col space-y-5" v-for="event in evnts">
+        <h1 class="text-4xl font-bold">{{ $dayjs(event.date_time).format('DD MMM') }}</h1>
+        <p class="text-lg font-medium my-2">{{ event.name }}</p>
+        <p class="text-md text-gray-500 mb-2">{{ event.description }}</p>
+        <div class="flex flex-row justify-start items-center mb-4">
+          <UIcon name="heroicons:map-pin-20-solid" class="text-2xl text-gray-500" dynamic/>
+          <p class="text-gray-500">{{ event.venue }}</p>
+        </div>
+        <div class="flex flex-row justify-start items-center space-x-2">
+          <UIcon name="heroicons:clock-solid" class="text-2xl text-gray-500" dynamic/>
+          <p class="text-gray-500">{{ $dayjs(event.date_time).format('HH:mm') }}</p>
+        </div>
       </UCard>
     </div>
     <Loader v-else/>
@@ -31,6 +41,11 @@ const evnts = ref([])
 const isPending = ref(true)
 const year = ref('2024')
 const month = ref('March')
+
+// import { useDayjs } from '#dayjs' // not need if you are using auto import
+// const dayjs = useDayjs()
+// dayjs.locale('fr')
+// dayjs.extend(...)
 
 
 const getAllEvents = async () => {

@@ -1,7 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: {enabled: true},
-    modules: ['@nuxt/ui', '@nuxtjs/tailwindcss', '@nuxtjs/supabase', "@nuxt/fonts"],
+    modules: ['@nuxt/ui', '@nuxtjs/tailwindcss', '@nuxtjs/supabase', "@nuxt/fonts",'dayjs-nuxt'],
+    dayjs: {
+        locales: ['en'],
+        defaultLocale: 'en',
+        plugins: ['relativeTime', 'advancedFormat'],
+    },
     fonts: {
         providers: {
             google: true,

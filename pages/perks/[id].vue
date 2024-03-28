@@ -1,15 +1,20 @@
 <template>
   <div class="w-full">
-    <div v-if="!isPending" class="flex flex-row mt-3">
-      <div class="w-3/6 bg-gray-50 border border-gray-300 rounded-lg h-[520px]"></div>
+    <div v-if="!isPending" class="flex flex-row mt-10">
+      <div class="w-3/6 border border-gray-200 rounded-lg h-[520px]">
+        <object :data="perk.image_url" :style="{height:'500px', objectFit:'contain'}" class="w-full z-10 p-5"/>
+      </div>
       <div class="px-5 w-3/6 flex flex-col space-y-4">
         <UBreadcrumb
             divider="/"
             :links="[{ label: 'Home', to: '/' }, { label: 'Perks', to:'/perks' }, { label: `${perk.product_name}` }]"
         />
         <h3 class="my-5 text-4xl">{{ perk.product_name }}</h3>
+        <h3 class="my-1 text-2xl">${{ perk.price }}</h3>
         <p>{{ perk.details }}</p>
-        <UButton class="w-1/2 text-center mt-2" size="xl">Buy now</UButton>
+        <div class="w-2/3 mt-3">
+          <UButton class="text-center px-5" size="xl">Buy now</UButton>
+        </div>
       </div>
     </div>
     <Loader v-else/>

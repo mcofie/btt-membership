@@ -10,33 +10,33 @@
         </div>
 
         <div class="flex flex-row space-x-6 items-center">
-          <NuxtLink to="/events" active-class="text-blue-700 font-medium">Events</NuxtLink>
-          <NuxtLink to="/resources" active-class="text-blue-700 font-medium">Resources</NuxtLink>
-          <NuxtLink to="/perks" active-class="text-blue-700 font-medium">Perks</NuxtLink>
-          <NuxtLink to="/co-working-spaces" active-class="text-blue-700 font-medium">Co Working Space</NuxtLink>
-          <NuxtLink to="/">
-            <UDropdown :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
-                       :popper="{ placement: 'bottom-start' }">
-              <UAvatar :src="userDetails.user_metadata.avatar_url ? userDetails.user_metadata.avatar_url : ''"/>
+          <NuxtLink to="/events" active-class="text-blue-700 font-bold">Events</NuxtLink>
+          <NuxtLink to="/resources" active-class="text-blue-700 font-bold">Resources</NuxtLink>
+          <NuxtLink to="/perks" active-class="text-blue-700 font-bold">Perks</NuxtLink>
+          <NuxtLink to="/co-working-spaces" active-class="text-blue-700 font-bold">Co Working Space</NuxtLink>
+<!--          <NuxtLink to="/">-->
+<!--            <UDropdown v-if="!isUserLoading" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"-->
+<!--                       :popper="{ placement: 'bottom-start' }">-->
+<!--              <UAvatar :src="userDetails.user_metadata.avatar_url ? userDetails.user_metadata.avatar_url : ''"/>-->
 
-              <template #account="{ item }">
-                <div class="text-left">
-                  <p>
-                    Signed in as
-                  </p>
-                  <p class="truncate font-medium text-gray-900 dark:text-white">
-                    {{ userDetails.email }}
-                  </p>
-                </div>
-              </template>
+<!--              <template #account="{ item }">-->
+<!--                <div class="text-left">-->
+<!--                  <p>-->
+<!--                    Signed in as-->
+<!--                  </p>-->
+<!--                  <p class="truncate font-medium text-gray-900 dark:text-white">-->
+<!--                    {{ userDetails.email }}-->
+<!--                  </p>-->
+<!--                </div>-->
+<!--              </template>-->
 
-              <template #item="{ item }" @click="signOut()">
-                <span class="truncate">{{ item.label }}</span>
+<!--              <template #item="{ item }" @click="signOut()">-->
+<!--                <span class="truncate">{{ item.label }}</span>-->
 
-                <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"/>
-              </template>
-            </UDropdown>
-          </NuxtLink>
+<!--                <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"/>-->
+<!--              </template>-->
+<!--            </UDropdown>-->
+<!--          </NuxtLink>-->
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
       <slot/>
     </div>
 
-    <div class="flex flex-row w-4/6 mx-auto mt-5 mb-2">
+    <div class="flex flex-row w-4/6 mx-auto mt-10 mb-2">
       <div
           class="border-gray-300 bg-gray-50 border text-gray-500 text-sm p-5 w-full rounded-lg flex flex-row justify-between items-center">
         <div>
@@ -72,14 +72,24 @@
 <script lang="ts" setup>
 const supabase = useSupabaseClient()
 const userDetails = ref({})
+const isUserLoading = ref(true)
 const {data} = await supabase.auth.getSession()
 
 
 onMounted(async () => {
-  const {data: {user}} = await supabase.auth.getUser()
-  userDetails.value = user
-  console.log(user)
+  await getUser()
 })
+
+const getUser = async () => {
+  isUserLoading.value = true
+  const {data: {user}} = await supabase.auth.getUser().then((data: any) => {
+    userDetails.value = user
+    isUserLoading.value = false
+  }).catch((error: any) => {
+    isUserLoading.value = false
+  })
+
+}
 
 const signOut = async () => {
   const {error} = await supabase.auth.signOut()

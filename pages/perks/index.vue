@@ -22,8 +22,12 @@
 
       <div class="grid grid-cols-3 gap-4 mt-5" v-if="!isPerksPending">
         <NuxtLink v-for="(perk,index) in prks" :to="`/perks/${perk.id}`">
-          <UCard class="w-full h-[220px]">
-            <p>{{ perk.product_name }}</p>
+          <UCard class="w-full p-0">
+            <object :data="perk.image_url" :style="{height:'300px', objectFit:'contain'}" class="w-full z-10"/>
+            <div class="z-20 w-full bg-gray-50 rounded-lg p-5">
+              <p class="text-xl">{{ perk.product_name }}</p>
+              <p class="text-sm">${{ perk.price }}</p>
+            </div>
           </UCard>
         </NuxtLink>
       </div>
@@ -64,31 +68,16 @@ onMounted(() => {
 const items = [
   [{
     label: 'Shirts',
-    avatar: {
-      src: 'https://avatars.githubusercontent.com/u/739984?v=4'
-    }
   }], [{
     label: 'Hoodies',
-    icon: 'i-heroicons-pencil-square-20-solid',
-    shortcuts: ['E'],
-    click: () => {
-      console.log('Edit')
-    }
   }, {
     label: 'Pants & Shorts',
-    icon: 'i-heroicons-document-duplicate-20-solid',
-    shortcuts: ['D'],
-    disabled: true
   }], [{
     label: 'Accessories',
-    icon: 'i-heroicons-archive-box-20-solid'
   }, {
     label: 'Jackets',
-    icon: 'i-heroicons-arrow-right-circle-20-solid'
   }], [{
     label: 'Bags',
-    icon: 'i-heroicons-trash-20-solid',
-    shortcuts: ['⌘', 'D']
   }]
 ]
 
