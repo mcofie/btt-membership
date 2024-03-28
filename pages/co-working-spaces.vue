@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="flex flex-row">
-      <div class="bg-orange-200 h-[400px] w-full rounded-2xl items-center flex justify-center">
+      <div class="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-[400px] w-full rounded-2xl items-center flex justify-center">
         <div class="p-5 flex flex-col items-center justify-center align-middle">
-          <h2 class="text-5xl font-bold">Collaborative Environment</h2>
+          <h2 class="text-5xl font-bold text-white">Collaborative Environment</h2>
         </div>
       </div>
     </div>

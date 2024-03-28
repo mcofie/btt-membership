@@ -10,9 +10,9 @@
         </div>
 
         <div class="flex flex-row space-x-6 items-center">
-          <NuxtLink to="/events" active-class="text-blue-700 font-bold">Events</NuxtLink>
-          <NuxtLink to="/resources" active-class="text-blue-700 font-bold">Resources</NuxtLink>
-          <NuxtLink to="/perks" active-class="text-blue-700 font-bold">Perks</NuxtLink>
+          <NuxtLink to="/events" active-class="text-blue-600 font-bold">Events</NuxtLink>
+          <NuxtLink to="/resources" active-class="text-blue-600 font-bold">Resources</NuxtLink>
+          <NuxtLink to="/perks" active-class="text-blue-600 font-bold">Perks</NuxtLink>
           <NuxtLink to="/co-working-spaces" active-class="text-blue-700 font-bold">Co Working Space</NuxtLink>
 <!--          <NuxtLink to="/">-->
 <!--            <UDropdown v-if="!isUserLoading" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"-->
@@ -82,12 +82,12 @@ onMounted(async () => {
 
 const getUser = async () => {
   isUserLoading.value = true
-  const {data: {user}} = await supabase.auth.getUser().then((data: any) => {
-    userDetails.value = user
-    isUserLoading.value = false
-  }).catch((error: any) => {
-    isUserLoading.value = false
-  })
+  // const {data: {user}} = await supabase.auth.getUser().then((data: any) => {
+  //   userDetails.value = user
+  //   isUserLoading.value = false
+  // }).catch((error: any) => {
+  //   isUserLoading.value = false
+  // })
 
 }
 

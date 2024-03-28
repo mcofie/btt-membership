@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="flex flex-row">
-      <div class="bg-yellow-200 h-[400px] w-full items-center flex rounded-2xl justify-center">
+      <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-[400px] w-full items-center flex rounded-2xl justify-center">
         <div class="p-5 flex flex-col items-center justify-center align-middle">
-          <h2 class="text-5xl font-bold">So glad you decided to join our fam.</h2>
-          <p class="my-2">Your presence is super important to us.
+          <h2 class="text-5xl font-bold text-white">So glad you decided to join our fam.</h2>
+          <p class="my-2 text-white">Your presence is super important to us.
             #1 Community of Black Technologists</p>
         </div>
       </div>

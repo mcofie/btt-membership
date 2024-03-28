@@ -18,7 +18,7 @@
 
     <div class="grid grid-cols-2 gap-4 mt-7" v-if="!isPending">
       <UCard class="w-full flex flex-col space-y-5" v-for="event in evnts">
-        <h1 class="text-4xl font-bold">{{ $dayjs(event.date_time).format('DD MMM') }}</h1>
+        <h1 class="text-4xl font-bold text-blue-600">{{ $dayjs(event.date_time).format('DD MMM') }}</h1>
         <p class="text-lg font-medium my-2">{{ event.name }}</p>
         <p class="text-md text-gray-500 mb-2">{{ event.description }}</p>
         <div class="flex flex-row justify-start items-center mb-4">
