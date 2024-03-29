@@ -15,7 +15,7 @@
           <UIcon name="i-mdi-apple" class="text-2xl" dynamic/>
           Continue with Apple
         </UButton>
-        <UButton color="primary" variant="outline" class="px-4">
+        <UButton color="primary" variant="outline" class="px-4" @click="signInWithLinkedIn()">
           <UIcon name="logos:linkedin-icon" class="text-2xl" dynamic/>
           Continue with LinkedIn
         </UButton>
@@ -37,6 +37,13 @@ const signInWithGoogle = async () => {
     provider: 'google',
   })
 }
+
+async function signInWithLinkedIn() {
+  const {data, error} = await supabase.auth.signInWithOAuth({
+    provider: 'linkedin_oidc',
+  })
+}
+
 </script>
 
 <style scoped>
