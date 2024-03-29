@@ -7,19 +7,19 @@
         {{ category.category }}
       </p>
       <div v-else class="flex flex-col space-y-4">
-        <USkeleton class="h-[50px] w-full" v-for="i in 10"/>
+        <USkeleton  class="h-[50px] w-full" v-for="i in 10"/>
       </div>
 
     </div>
     <div class="col-span-4 p-5">
-      <UTabs v-if="!isResource" :items="items" class="w-full">
+      <UTabs v-if="!isResource"  :items="items" class="w-full">
         <template #item="{ item, index, selected }">
 
           <div v-if="item.key === 'documents'" class="space-y-3">
             <div class="grid grid-cols-4 gap-2">
-              <a v-for="r in resource" target="_blank" :href="r.url_resource">
-                <UCard class="w-full h-[170px] bg-blue-600 rounded-lg flex flex-col justify-end">
-                  <UIcon class="justify-start text-white text-lg my-2" name="teenyicons:pdf-outline" dynamic/>
+              <a v-for="r in resource" target="_blank" :href="r.url_resource" >
+                <UCard v-if="r.source === 'document'" class="w-full h-[170px] bg-blue-600 hover:bg-blue-500 rounded-lg flex flex-col justify-end">
+                  <UIcon  class="justify-start text-white text-lg my-2" name="teenyicons:pdf-outline" dynamic/>
 
                   <div class="flex flex-col	justify-end">
                     <h3 class="text-lg text-white line-clamp-2">{{ r.title }}</h3>
@@ -32,7 +32,7 @@
           <div v-else-if="item.key === 'videos'" class="space-y-3">
             <div class="grid grid-cols-4 gap-2">
               <a v-for="r in resource" target="_blank" :href="r.url_resource">
-                <UCard class="w-full h-[170px] bg-purple-600 rounded-lg flex flex-col justify-end">
+                <UCard v-if="r.source === 'video'" class="w-full h-[170px] bg-purple-600 hover:bg-purple-500 rounded-lg flex flex-col justify-end">
                   <UIcon class="justify-start text-white text-lg my-2" name="teenyicons:mp4-outline" dynamic/>
 
                   <div class="flex flex-col	justify-end">
