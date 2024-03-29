@@ -14,29 +14,29 @@
           <NuxtLink to="/resources" active-class="text-blue-600 font-bold">Resources</NuxtLink>
           <NuxtLink to="/perks" active-class="text-blue-600 font-bold">Perks</NuxtLink>
           <NuxtLink to="/co-working-spaces" active-class="text-blue-600 font-bold">Co Working Space</NuxtLink>
-          <!--          <NuxtLink to="/">-->
-          <!--            <UDropdown v-if="!isUserLoading" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"-->
-          <!--                       :popper="{ placement: 'bottom-start' }">-->
-          <!--              <UAvatar :src="userDetails.user_metadata.avatar_url ? userDetails.user_metadata.avatar_url : ''"/>-->
+          <NuxtLink to="/">
+            <UDropdown v-if="!isUserLoading" :items="items" :ui="{ item: { disabled: 'cursor-text select-text' } }"
+                       :popper="{ placement: 'bottom-start' }">
+              <UAvatar :src="avatarUrl"/>
 
-          <!--              <template #account="{ item }">-->
-          <!--                <div class="text-left">-->
-          <!--                  <p>-->
-          <!--                    Signed in as-->
-          <!--                  </p>-->
-          <!--                  <p class="truncate font-medium text-gray-900 dark:text-white">-->
-          <!--                    {{ userDetails.email }}-->
-          <!--                  </p>-->
-          <!--                </div>-->
-          <!--              </template>-->
+              <template #account="{ item }">
+                <div class="text-left">
+                  <p>
+                    Signed in as
+                  </p>
+                  <p class="truncate font-medium text-gray-900 dark:text-white">
+                    {{ email }}
+                  </p>
+                </div>
+              </template>
 
-          <!--              <template #item="{ item }" @click="signOut()">-->
-          <!--                <span class="truncate">{{ item.label }}</span>-->
+              <template #item="{ item }" @click="signOut()">
+                <span class="truncate">{{ item.label }}</span>
 
-          <!--                <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"/>-->
-          <!--              </template>-->
-          <!--            </UDropdown>-->
-          <!--          </NuxtLink>-->
+                <UIcon :name="item.icon" class="flex-shrink-0 h-4 w-4 text-gray-400 dark:text-gray-500 ms-auto"/>
+              </template>
+            </UDropdown>
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -51,6 +51,7 @@
         <div>
           <p>Black Tech Talent Membership</p>
           <small> &copy; 2024 </small>
+          <small class="text-red-400 cursor-pointer underline" @click="signOut()">(Logout)</small>
         </div>
 
         <div class="flex flex-row space-x-4 w-1/2 justify-center mx-auto">
@@ -82,20 +83,31 @@ const supabase = useSupabaseClient()
 const userDetails = ref({})
 const isUserLoading = ref(true)
 const {data} = await supabase.auth.getSession()
+const avatarUrl = ref('')
+const email = ref('')
 
 
 onMounted(async () => {
   await getUser()
+
 })
 
 const getUser = async () => {
+  console.log((await supabase.auth.getUser()).data.user)
+
+  avatarUrl.value = (await supabase.auth.getUser()).data.user?.user_metadata?.avatar_url
+  email.value = (await supabase.auth.getUser()).data.user?.email
+
   isUserLoading.value = true
-  // const {data: {user}} = await supabase.auth.getUser().then((data: any) => {
-  //   userDetails.value = user
-  //   isUserLoading.value = false
-  // }).catch((error: any) => {
-  //   isUserLoading.value = false
-  // })
+  const {data: {user}} = await supabase.auth.getUser().then(data => {
+    userDetails.value = user
+    isUserLoading.value = false
+
+    console.log(user)
+
+  }).catch(error => {
+    isUserLoading.value = false
+  })
 
 }
 
@@ -105,7 +117,7 @@ const signOut = async () => {
 
 const items = [
   [{
-    label: 'ben@example.com',
+    label: email.value,
     slot: 'account',
     disabled: true
   }], [{

@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="flex flex-row">
-      <div class="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-[400px] w-full rounded-2xl items-center flex justify-center">
+      <div
+          class="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-[400px] w-full rounded-2xl items-center flex justify-center">
         <div class="p-5 flex flex-col items-center justify-center align-middle">
           <h2 class="text-5xl font-bold text-white">Collaborative Environment</h2>
         </div>
@@ -22,25 +23,28 @@
       </UCard>
     </div>
 
-    <div class="flex flex-col w-3/5 my-10 border border-gray-300 rounded-lg p-5">
-      <h1 class="text-2xl">Booking</h1>
+    <UDivider class="mt-10" label="Booking" type="dashed"
+              :ui="{ label: 'text-2xl text-primary-500 dark:text-primary-400' }"/>
+
+
+    <div class="flex flex-col w-3/5 my-10 border justify-center mx-auto border-gray-300 rounded-lg p-5">
       <div class="flex-row space flex space-x-4 my-5">
         <UFormGroup label="First name" name="text" class="w-1/2">
-          <UInput size="xl" v-model="email"/>
+          <UInput size="xl" v-model="booking.firstName"/>
         </UFormGroup>
 
         <UFormGroup label="Last name" name="password" class="w-1/2">
-          <UInput size="xl" v-model="password" type="text"/>
+          <UInput size="xl" v-model="booking.lastName" type="text"/>
         </UFormGroup>
       </div>
 
       <div class="flex-row space flex space-x-4">
         <UFormGroup label="Email" name="email" class="w-1/2">
-          <UInput v-model="email" size="xl"/>
+          <UInput v-model="booking.email" size="xl"/>
         </UFormGroup>
 
         <UFormGroup label="Phone" name="password" class="w-1/2">
-          <UInput v-model="password" type="password" size="xl"/>
+          <UInput v-model="booking.phone" type="text" size="xl"/>
         </UFormGroup>
       </div>
       <div class="my-2 w-full">
@@ -55,7 +59,10 @@
 
       <div class="my-2">
         <UButton
-            size="sm"
+            :loading="sendingBookings"
+            @click="makeBooking()"
+            block
+            size="md"
             color="primary"
             variant="solid"
             label="Book space"
@@ -70,10 +77,14 @@
 <script lang="ts" setup>
 import {DatePicker} from "v-calendar";
 import {format} from "date-fns";
+const sendingBookings = ref(false)
+const toast = useToast()
+
+
+const supabase = useSupabaseClient()
 
 const date = ref(new Date())
-const email = ref('')
-const password = ref('')
+const booking = ref({} as IBooking)
 
 const amenities = [
   {
@@ -105,6 +116,39 @@ const amenities = [
     icon: 'i-icon-park-user-business'
   },
 ];
+
+const makeBooking = async () => {
+  sendingBookings.value = true
+  try{
+    const {data, error} = await supabase
+        .from('booking')
+        .insert([
+          {
+            firstname: booking.value.firstName,
+            lastname: booking.value.lastName,
+            phone: booking.value.phone,
+            email: booking.value.email,
+            date: date.value
+          },
+        ])
+        .select()
+    sendingBookings.value = false
+    toast.add({title:'Booking successfully added'})
+    booking.value = ({} as IBooking)
+  }catch (e) {
+    sendingBookings.value = false
+  }
+
+
+}
+
+interface IBooking {
+  firstName: string
+  lastName: string,
+  email: string,
+  phone: string
+  date: string
+}
 
 definePageMeta({
   layout: 'main'

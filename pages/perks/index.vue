@@ -21,7 +21,7 @@
           <UButton color="white" :label="category" trailing-icon="i-heroicons-chevron-down-20-solid"/>
         </USelectMenu>
 
-        <UButton @click="getAllPerks()" label="Clear">
+        <UButton variant="outline" @click="getAllPerks()" label="Clear">
           <template #trailing>
             <UIcon name="mdi:close" class="w-5 h-5" dynamic/>
           </template>
@@ -53,8 +53,8 @@
 const supabase = useSupabaseClient()
 const isPerksPending = ref(true)
 const prks = ref([])
-const gender = ref('men')
-const category = ref('hoodies')
+const gender = ref('Men')
+const category = ref('Hoodies')
 
 definePageMeta({
   layout: 'main'
