@@ -21,19 +21,21 @@
     </div>
 
     <div class="grid grid-cols-2 gap-4 mt-7" v-if="!isPending">
-      <UCard v-if="evnts.length !== 0" class="w-full flex flex-col space-y-5" v-for="event in evnts">
-        <h1 class="text-4xl font-bold text-blue-600">{{ $dayjs(event.date_time).format('DD MMM') }}</h1>
-        <p class="text-lg font-medium my-2">{{ event.name }}</p>
-        <p class="text-md text-gray-500 mb-2">{{ event.description }}</p>
-        <div class="flex flex-row justify-start items-center mb-4">
-          <UIcon name="heroicons:map-pin-20-solid" class="text-2xl text-gray-500" dynamic/>
-          <p class="text-gray-500">{{ event.venue }}</p>
-        </div>
-        <div class="flex flex-row justify-start items-center space-x-2">
-          <UIcon name="heroicons:clock-solid" class="text-2xl text-gray-500" dynamic/>
-          <p class="text-gray-500">{{ $dayjs(event.date_time).format('HH:mm') }}</p>
-        </div>
-      </UCard>
+      <NuxtLink :to="`/events/${event.id}`" v-if="evnts.length !== 0" v-for="event in evnts">
+        <UCard class="w-full flex flex-col space-y-5">
+          <h1 class="text-4xl font-bold text-blue-600">{{ $dayjs(event.date_time).format('DD MMM') }}</h1>
+          <p class="text-lg font-medium my-2">{{ event.name }}</p>
+          <p class="text-md text-gray-500 mb-2">{{ event.description }}</p>
+          <div class="flex flex-row justify-start items-center mb-4">
+            <UIcon name="heroicons:map-pin-20-solid" class="text-2xl text-gray-500" dynamic/>
+            <p class="text-gray-500">{{ event.venue }}</p>
+          </div>
+          <div class="flex flex-row justify-start items-center space-x-2">
+            <UIcon name="heroicons:clock-solid" class="text-2xl text-gray-500" dynamic/>
+            <p class="text-gray-500">{{ $dayjs(event.date_time).format('HH:mm') }}</p>
+          </div>
+        </UCard>
+      </NuxtLink>
       <div class="col-span-2 text-center justify-center py-5" v-else>
         <UIcon name="icon-park-twotone:winking-face" class="text-5xl" dynamic/>
         <p>Nothing found</p>
@@ -57,7 +59,7 @@ watch(year, async (newYear: string, oldYear: string) => {
 })
 
 watch(month, async (newMonth: string, oldMonth: string) => {
-  await selectRowsByYear(year.value,newMonth)
+  await selectRowsByYear(year.value, newMonth)
 })
 
 
@@ -68,7 +70,7 @@ const getAllEvents = async () => {
   evnts.value = events
 }
 
-async function selectRowsByYear(year: string,month: string) {
+async function selectRowsByYear(year: string, month: string) {
 
   const targetMonth = monthInYears.indexOf(month)
 

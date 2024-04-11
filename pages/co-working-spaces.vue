@@ -138,9 +138,9 @@ const makeBooking = async () => {
   }catch (e) {
     sendingBookings.value = false
   }
-
-
 }
+
+
 
 interface IBooking {
   firstName: string

@@ -13,9 +13,9 @@
 
     <div class="w-full">
       <div class="w-2/4 flex flex-row my-5 space-x-3">
-        <USelectMenu :options="items2" :popper="{ placement: 'bottom-start' }" v-model="gender">
-          <UButton color="white" :label="gender" trailing-icon="i-heroicons-chevron-down-20-solid"/>
-        </USelectMenu>
+<!--        <USelectMenu :options="items2" :popper="{ placement: 'bottom-start' }" v-model="gender">-->
+<!--          <UButton color="white" :label="gender" trailing-icon="i-heroicons-chevron-down-20-solid"/>-->
+<!--        </USelectMenu>-->
 
         <USelectMenu :options="items" :popper="{ placement: 'bottom-start' }" v-model="category">
           <UButton color="white" :label="category" trailing-icon="i-heroicons-chevron-down-20-solid"/>
