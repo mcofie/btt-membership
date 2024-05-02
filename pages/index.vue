@@ -29,7 +29,8 @@
       </div>
     </div>
 
-    <div class="w-full bg-gray-50 py-5 rounded-lg border border-gray-300">
+    <div
+        class="w-full bg-gray-50 dark:text-white dark:border-gray-800 dark:bg-gray-900 py-5 rounded-lg border border-gray-300">
       <div class="text-center px-10 py-5">
         <h1 class="text-3xl">Give Us Some Feedback</h1>
         <p class="mb-5">What do you think?</p>

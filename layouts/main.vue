@@ -2,10 +2,13 @@
   <div>
     <div class="flex flex-row">
       <div
-          class="w-4/6 border border-gray-200 bg-white h-[60px] mx-auto rounded-lg my-4 flex flex-row justify-between items-center p-5">
-        <div>
-          <NuxtLink to="/">
-            <img src="../public/imgs/btt-logo.svg" class="w-7 h-7"/>
+          class="w-4/6 border border-gray-200 dark:border-gray-800 dark:bg-gray-900 bg-white h-[60px] mx-auto rounded-lg my-4 flex flex-row justify-between items-center p-5">
+        <div class="flex flex-col">
+          <NuxtLink to="/" class="flex flex-row items-center justify-center">
+            <img v-if="isDark" src="../public/imgs/btt-logo-dark.svg" class="w-12 h-12 mr-"/>
+            <img v-if="!isDark" src="../public/imgs/btt-logo-light.svg" class="w-12 h-12 mr-"/>
+            <Icon name="ic:sharp-minus" class="dark:text-white text-gray-900" dynamic/>
+            <p class="text-sm mx-1">Members Only</p>
           </NuxtLink>
         </div>
 
@@ -37,6 +40,13 @@
               </template>
             </UDropdown>
           </NuxtLink>
+          <UButton
+              :icon="isDark ? 'i-heroicons-moon-20-solid' : 'i-heroicons-sun-20-solid'"
+              color="gray"
+              variant="ghost"
+              aria-label="Theme"
+              @click="isDark = !isDark"
+          />
         </div>
       </div>
     </div>
@@ -47,7 +57,7 @@
 
     <div class="flex flex-row w-4/6 mx-auto mt-10 mb-2">
       <div
-          class="border-gray-300 bg-gray-50 border text-gray-500 text-sm p-5 w-full rounded-lg flex flex-row justify-between items-center">
+          class="border-gray-300 bg-gray-50 dark:text-white dark:border-gray-800 dark:bg-gray-900 border text-gray-500 text-sm p-5 w-full rounded-lg flex flex-row justify-between items-center">
         <div>
           <p>Black Tech Talent Membership</p>
           <small> &copy; 2024 </small>
@@ -85,6 +95,16 @@ const isUserLoading = ref(true)
 const {data} = await supabase.auth.getSession()
 const avatarUrl = ref('')
 const email = ref('')
+
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
 
 
 onMounted(async () => {

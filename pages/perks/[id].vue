@@ -3,7 +3,7 @@
     <div v-if="!isPending" class="flex flex-col mt-10">
 
       <div class="flex flex-row">
-        <div class="w-3/6 border border-gray-200 rounded-lg h-[520px]">
+        <div class="w-3/6 border border-gray-200 dark:border-gray-800 rounded-lg h-[520px]">
           <object :data="perk.image_url" :style="{height:'500px', objectFit:'contain'}" class="w-full z-10 p-5"/>
         </div>
         <div class="px-5 w-3/6 flex flex-col space-y-4">

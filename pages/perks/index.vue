@@ -33,7 +33,7 @@
         <NuxtLink v-for="(perk,index) in prks" :to="`/perks/${perk.id}`">
           <UCard class="w-full p-0">
             <object :data="perk.image_url" :style="{height:'300px', objectFit:'contain'}" class="w-full z-10"/>
-            <div class="z-20 w-full bg-gray-50 rounded-lg p-5">
+            <div class="z-20 w-full bg-gray-50 dark:bg-gray-800 rounded-lg p-5">
               <p class="text-xl font-bond">{{ perk.product_name }}</p>
               <p class="text-sm">${{ perk.price }}</p>
             </div>

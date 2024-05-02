@@ -1,8 +1,8 @@
 <template>
   <div class="grid grid-cols-6">
-    <div class="col-span-2 border-r border-gray-200 p-5">
+    <div class="col-span-2 border-r border-gray-200 dark:border-gray-800 p-5">
       <p v-for="category in categories" class="py-2 cursor-pointer" v-if="!isCategory"
-         :class="[selected === category.category ? 'text-blue-500 bg-gray-100 p-2 rounded-lg font-medium' : '']"
+         :class="[selected === category.category ? 'text-blue-500 dark:bg-gray-800 dark:text-blue-500 bg-gray-100 p-2 rounded-lg font-medium' : '']"
          @click="categorySelected(category.category)">
         {{ category.category }}
       </p>
