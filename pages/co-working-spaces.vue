@@ -4,7 +4,7 @@
       <div
           class="bg-gradient-to-r from-violet-500 to-fuchsia-500 h-[400px] w-full rounded-2xl items-center flex justify-center">
         <div class="p-5 flex flex-col items-center justify-center align-middle">
-          <h2 class="text-5xl font-bold text-white">Collaborative Environment</h2>
+          <h2 class="text-5xl font-bold text-white dark:text-black">Collaborative Environment</h2>
         </div>
       </div>
     </div>
@@ -27,49 +27,16 @@
               :ui="{ label: 'text-2xl text-primary-500 dark:text-primary-400' }"/>
 
 
-    <div class="flex flex-col w-3/5 my-10 border justify-center mx-auto border-gray-300 rounded-lg p-5">
-      <div class="flex-row space flex space-x-4 my-5">
-        <UFormGroup label="First name" name="text" class="w-1/2">
-          <UInput size="xl" v-model="booking.firstName"/>
-        </UFormGroup>
-
-        <UFormGroup label="Last name" name="password" class="w-1/2">
-          <UInput size="xl" v-model="booking.lastName" type="text"/>
-        </UFormGroup>
-      </div>
-
-      <div class="flex-row space flex space-x-4">
-        <UFormGroup label="Email" name="email" class="w-1/2">
-          <UInput v-model="booking.email" size="xl"/>
-        </UFormGroup>
-
-        <UFormGroup label="Phone" name="password" class="w-1/2">
-          <UInput v-model="booking.phone" type="text" size="xl"/>
-        </UFormGroup>
-      </div>
-      <div class="my-2 w-full">
-        <UPopover :popper="{ placement: 'bottom-start' }">
-          <UButton icon="i-heroicons-calendar-days-20-solid" :label="format(date, 'd MMM, yyy')"/>
-
-          <template #panel="{ close }">
-            <DatePicker v-model="date" is-required @close="close"/>
-          </template>
-        </UPopover>
-      </div>
-
-      <div class="my-2">
-        <UButton
-            :loading="sendingBookings"
-            @click="makeBooking()"
-            block
-            size="md"
-            color="primary"
-            variant="solid"
-            label="Book space"
-            :trailing="false"
-        />
-      </div>
+    <div class="my-5">
+      <iframe
+          id="inlineFrameExample"
+          title="Inline Frame Example"
+          width="100%"
+          height="550"
+          src="https://calendly.com/blacktechtalent/hq-coworking">
+      </iframe>
     </div>
+
 
   </div>
 </template>
@@ -77,6 +44,7 @@
 <script lang="ts" setup>
 import {DatePicker} from "v-calendar";
 import {format} from "date-fns";
+
 const sendingBookings = ref(false)
 const toast = useToast()
 
@@ -119,7 +87,7 @@ const amenities = [
 
 const makeBooking = async () => {
   sendingBookings.value = true
-  try{
+  try {
     const {data, error} = await supabase
         .from('booking')
         .insert([
@@ -133,13 +101,12 @@ const makeBooking = async () => {
         ])
         .select()
     sendingBookings.value = false
-    toast.add({title:'Booking successfully added'})
+    toast.add({title: 'Booking successfully added'})
     booking.value = ({} as IBooking)
-  }catch (e) {
+  } catch (e) {
     sendingBookings.value = false
   }
 }
-
 
 
 interface IBooking {

@@ -4,8 +4,11 @@
       <div
           class="bg-gradient-to-r from-cyan-500 to-blue-500 h-[400px] w-full items-center flex rounded-2xl justify-center">
         <div class="p-5 flex flex-col items-center justify-center align-middle">
-          <h2 class="text-5xl font-bold text-white">So glad you decided to join our fam.</h2>
-          <p class="my-2 text-white">Your presence is super important to us.
+          <img v-if="isDark" src="../public/imgs/logo.svg" class="w-48 rounded-2xl"/>
+          <img v-if="!isDark" src="../public/imgs/logo_white.svg" class="w-48 rounded-2xl"/>
+
+          <h2 class="text-5xl font-bold text-white dark:text-black">So glad you decided to join our fam.</h2>
+          <p class="my-2 text-white dark:text-black">Your presence is super important to us.
             #1 Community of Black Technologists</p>
         </div>
       </div>
@@ -13,7 +16,7 @@
 
     <div class="w-full flex flex-row my-10 justify-between items-center">
       <div class="w-1/2">
-        <img src="../public/imgs/black_guy.jpg" class="h-[350px] w-full rounded-2xl"/>
+        <img src="../public/imgs/black_guy.jpg" class="w-full rounded-2xl"/>
       </div>
       <p class="w-1/2 p-5 text-2xl leading-relaxed">
         Black Tech Talent aims to increase the representation of Black technologists in both corporate careers and
@@ -25,8 +28,12 @@
     <div class="flex flex-row mb-10">
       <div class="bg-gray-200 w-full rounded-lg">
         <iframe class="w-full h-[400px] aspect-video md:aspect-square"
-                src="https://www.youtube.com/embed/NQ1ringLWQs"></iframe>
+                src="https://vimeo.com/916393160/855509fcbf"></iframe>
       </div>
+
+      <vue-vimeo-player
+          video-id="916393160"
+      />
     </div>
 
     <div
@@ -80,8 +87,19 @@
 </template>
 
 <script lang="ts" setup>
+import {vueVimeoPlayer} from 'vue-vimeo-player'
+
 definePageMeta({
   layout: 'main'
+})
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
 })
 const supabase = useSupabaseClient()
 const toast = useToast()

@@ -12,10 +12,20 @@
               :links="[{ label: 'Home', to: '/' }, { label: 'Events', to:'/events' }, { label: `${event.name}` }]"
           />
           <h3 class="my-5 text-4xl">{{ event.name }}</h3>
-<!--          <h3 class="my-1 text-2xl">${{ perk.price }}</h3>-->
+          <!--          <h3 class="my-1 text-2xl">${{ perk.price }}</h3>-->
+          <div class="flex flex-row justify-start items-center mb-4">
+            <UIcon name="heroicons:map-pin-20-solid" class="text-2xl text-gray-500" dynamic/>
+            <p class="text-gray-500">{{ event.venue }}</p>
+          </div>
+          <div class="flex flex-row justify-start items-center space-x-2">
+            <UIcon name="heroicons:clock-solid" class="text-2xl text-gray-500" dynamic/>
+            <p class="text-gray-500">{{ $dayjs(event.date_time).format('HH:mm') }}</p>
+          </div>
           <p>{{ event.description }}</p>
           <div class="w-2/3 mt-3">
-            <UButton class="text-center px-5" size="xl">Buy Ticket</UButton>
+            <a :href="event.ticket_url" target="_blank">
+              <UButton class="text-center px-5" size="xl">Buy Ticket</UButton>
+            </a>
           </div>
         </div>
       </div>

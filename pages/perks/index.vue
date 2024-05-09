@@ -4,8 +4,8 @@
       <div
           class="bg-gradient-to-r from-purple-500 to-pink-500 h-[400px] w-full flex items-center rounded-2xl justify-center">
         <div class="p-5 flex flex-col items-center justify-center align-middle">
-          <h2 class="text-5xl font-bold text-white">Save 15% On all Hoodies</h2>
-          <p class="my-2 text-white">Use code <span class="font-bold underline decoration-wavy">‘Hoodie15’</span> at
+          <h2 class="text-5xl font-bold text-white dark:text-black">Save 15% On all Hoodies</h2>
+          <p class="my-2 text-white dark:text-black">Use code <span class="font-bold underline decoration-wavy">‘Hoodie15’</span> at
             Checkout</p>
         </div>
       </div>
@@ -13,9 +13,6 @@
 
     <div class="w-full">
       <div class="w-2/4 flex flex-row my-5 space-x-3">
-<!--        <USelectMenu :options="items2" :popper="{ placement: 'bottom-start' }" v-model="gender">-->
-<!--          <UButton color="white" :label="gender" trailing-icon="i-heroicons-chevron-down-20-solid"/>-->
-<!--        </USelectMenu>-->
 
         <USelectMenu :options="items" :popper="{ placement: 'bottom-start' }" v-model="category">
           <UButton color="white" :label="category" trailing-icon="i-heroicons-chevron-down-20-solid"/>

@@ -1,19 +1,16 @@
 <template>
   <div class="grid grid-cols-3 justify-center items-center">
     <div
-        class="space-y-5 p-5 w-full flex flex-col text-center mt-20 items-center justify-center h-[400px] bg-white rounded-lg border border-gray-300 col-start-2">
+        class="space-y-5 p-10 w-full flex flex-col text-center mt-20 items-center justify-center bg-white rounded-lg border border-gray-300 col-start-2">
 
-      <img src="../public/imgs/btt-logo.svg" class="w-10 h-10 text-center"/>
-      <h2 class="text-4xl font-bold">Welcome to BTT <br/>Membership</h2>
-      <UButton color="primary" variant="outline" @click="signInWithGoogle()" class="px-4">
-        <UIcon name="logos:google-icon" class="text-2xl" dynamic/>
-        Sign In with Google
-      </UButton>
-      <UDivider label="OR"/>
+      <img v-if="isDark" src="../public/imgs/logo.svg" class="w-48 text-center"/>
+      <img v-if="!isDark" src="../public/imgs/logo_white.svg" class="w-48 text-center"/>
+
+      <h2 class="text-4xl font-bold dark:text-black">Welcome to BTT <br/>Membership</h2>
       <div class="flex flex-row space-x-2">
-        <UButton color="black" class="px-4">
-          <UIcon name="i-mdi-apple" class="text-2xl" dynamic/>
-          Continue with Apple
+        <UButton color="primary" variant="outline" @click="signInWithGoogle()" class="px-4">
+          <UIcon name="logos:google-icon" class="text-2xl" dynamic/>
+          Sign In with Google
         </UButton>
         <UButton color="primary" variant="outline" class="px-4" @click="signInWithLinkedIn()">
           <UIcon name="logos:linkedin-icon" class="text-2xl" dynamic/>
@@ -25,7 +22,15 @@
 </template>
 
 <script lang="ts" setup>
-
+const colorMode = useColorMode()
+const isDark = computed({
+  get() {
+    return colorMode.value === 'dark'
+  },
+  set() {
+    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+  }
+})
 
 const supabase = useSupabaseClient()
 const email = ref('')

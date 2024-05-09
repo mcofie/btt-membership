@@ -15,7 +15,9 @@
           <h3 class="my-1 text-2xl">${{ perk.price }}</h3>
           <p>{{ perk.details }}</p>
           <div class="w-2/3 mt-3">
-            <UButton class="text-center px-5" size="xl">Buy now</UButton>
+            <a :href="perk.payment_link" target="_blank">
+              <UButton class="text-center px-5" size="xl">Buy now</UButton>
+            </a>
           </div>
         </div>
       </div>
@@ -24,7 +26,8 @@
           class="mt-5 bg-gradient-to-r from-purple-500 to-pink-500 h-[400px] w-full flex items-center rounded-2xl justify-center">
         <div class="p-5 flex flex-col items-center justify-center align-middle">
           <h2 class="text-5xl font-bold text-white">Save 15% On all Hoodies</h2>
-          <p class="my-2 text-white">Use code <span class="font-bold underline decoration-wavy">‘Hoodie15’</span> at Checkout</p>
+          <p class="my-2 text-white">Use code <span class="font-bold underline decoration-wavy">‘Hoodie15’</span> at
+            Checkout</p>
         </div>
       </div>
 

@@ -16,7 +16,8 @@
     "nuxt": "^3.11.1",
     "v-calendar": "^3.1.2",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue-vimeo-player": "^1.1.2"
   },
   "devDependencies": {
     "@nuxtjs/supabase": "^1.1.7",
