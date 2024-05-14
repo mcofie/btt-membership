@@ -26,12 +26,8 @@
     </div>
 
     <div class="flex flex-row mb-10">
-      <div class="bg-gray-200 w-full rounded-lg">
-        <iframe class="w-full h-[400px] aspect-video md:aspect-square"
-                src="https://vimeo.com/916393160/855509fcbf"></iframe>
-      </div>
-
       <vue-vimeo-player
+          player-width=1080
           video-id="916393160"
       />
     </div>
