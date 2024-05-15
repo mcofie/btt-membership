@@ -27,8 +27,9 @@
 
     <div class="flex flex-row mb-10">
       <vue-vimeo-player
-          player-width=1080
+          player-width="1080"
           video-id="916393160"
+          autoplay="true"
       />
     </div>
 
