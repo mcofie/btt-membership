@@ -18,7 +18,8 @@ export default defineNuxtConfig({
         // Remove or comment out the auth configuration
         auth: {
             // Auth configuration options
-        }
+        },
+        exclude: ['/membership'],
     },
     css: ['~/assets/css/main.css'],
     postcss: {
