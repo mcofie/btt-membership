@@ -89,6 +89,7 @@ import {vueVimeoPlayer} from 'vue-vimeo-player'
 definePageMeta({
   layout: 'main'
 })
+
 const colorMode = useColorMode()
 const isDark = computed({
   get() {
