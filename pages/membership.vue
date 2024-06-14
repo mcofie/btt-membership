@@ -3,7 +3,7 @@
     <div class="py-20  w-4/5 mx-auto text-white">
       <div class="flex-col flex justify-center items-center p-5 space-y-5 w-fit mx-auto text-center">
         <img src="public/imgs/logo_white.svg" class="w-32">
-        <h1 class="text-6xl 2xl:text-8xl xl:text-7xl lg:text-6xl md:text-6xl">Join The <span class="font-bold px-4">Legacy</span>
+        <h1 class="text-6xl 2xl:text-8xl xl:text-7xl lg:text-6xl md:text-6xl">Join the <span class="font-bold px-4">Legacy</span>
         </h1>
         <p class="text-xl 2xl:text-4xl w-3/4 mx-auto">Unleash your Potential: Unlock Exclusive Benefits with Black Tech
           Talent Membership.</p>
@@ -31,14 +31,9 @@
                 style="position:absolute;top:0;left:0;width:100%;height:100%;"
                 title="Black Tech Talent - Legacy"></iframe>
       </div>
-      <div class="bg-black px-5 py-2 w-fit mx-auto">
-        <small class="text-center text-gray-400 flex justify-center my-2">Unlock Exclusive Benefits with a Black Tech
-          Talent
-          Membership</small>
-      </div>
     </div>
 
-    <div class="w-4/5 mx-auto my-10 flex flex-col items-center">
+    <div class="w-4/5 2xl:w-4/6 mx-auto my-10 flex flex-col items-center">
 
       <h3 class="text-white text-center text-xl 2xl:text-3xl 2xl:w-3/4 mx-auto">
         Elevate your tech journey with our curated membership program, designed to empower innovators, entrepreneurs and
@@ -46,7 +41,8 @@
       </h3>
 
       <div class="grid 2xl:grid-cols-3 xl:grid-cols-3 grid-cols-1 gap-4 my-10 text-start text-center">
-        <div class="border-2 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
+        <div
+            class="border-2 border-gray-500 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               width="75"
@@ -88,12 +84,13 @@
               />
             </g>
           </svg>
-          <h3 class="text-2xl 2xl:text-3xl xl:text-3xl md:text-3xl lg:text-3xl">Unmatched Networking Opportunities</h3>
-          <p class="2xl:text-lg text-gray-300"> Connect with industry experts, thought leaders and fellow
+          <h3 class="text-2xl 2xl:text-2xl xl:text-3xl md:text-3xl lg:text-3xl">Unmatched Networking Opportunities</h3>
+          <p class="2xl:text-md text-gray-300"> Connect with industry experts, thought leaders and fellow
             tech enthusiasts through exclusive events, workshops and
             online forums.</p>
         </div>
-        <div class="border-2 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
+        <div
+            class="border-2 border-gray-500 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               width="75"
@@ -105,11 +102,12 @@
                 d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v14q0 .825-.587 1.413T19 21zm3-11q-.425 0-.712.288T7 11v5q0 .425.288.713T8 17q.425 0 .713-.288T9 16v-5q0-.425-.288-.712T8 10m4-3q-.425 0-.712.288T11 8v8q0 .425.288.713T12 17q.425 0 .713-.288T13 16V8q0-.425-.288-.712T12 7m4 6q-.425 0-.712.288T15 14v2q0 .425.288.713T16 17q.425 0 .713-.288T17 16v-2q0-.425-.288-.712T16 13"
             />
           </svg>
-          <h3 class="text-2xl 2xl:text-3xl xl:text-3xl md:text-3xl lg:text-3xl">Access to Cutting-Edge Insights</h3>
-          <p class="2xl:text-lg text-gray-300"> Stay ahead of the curve with our curated content,
+          <h3 class="text-2xl 2xl:text-2xl xl:text-3xl md:text-3xl lg:text-3xl">Access to Cutting-Edge Insights</h3>
+          <p class="2xl:text-md text-gray-300"> Stay ahead of the curve with our curated content,
             including industry reports, white papers and webinars.</p>
         </div>
-        <div class="border-2 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
+        <div
+            class="border-2 border-gray-500 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               width="75"
@@ -123,11 +121,12 @@
                 clip-rule="evenodd"
             />
           </svg>
-          <h3 class="text-2xl 2xl:text-3xl xl:text-3xl md:text-3xl lg:text-3xl">Tailored Support and Guidance</h3>
-          <p class="2xl:text-lg text-gray-300">Benefit from personalised mentorship, coaching and
+          <h3 class="text-2xl 2xl:text-2xl xl:text-3xl md:text-3xl lg:text-3xl">Tailored Support and Guidance</h3>
+          <p class="2xl:text-md text-gray-300">Benefit from personalised mentorship, coaching and
             advisory services to help you navigate the tech landscape.</p>
         </div>
-        <div class="border-2 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
+        <div
+            class="border-2 border-gray-500 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               width="75"
@@ -141,11 +140,12 @@
                 clip-rule="evenodd"
             />
           </svg>
-          <h3 class="text-2xl 2xl:text-3xl xl:text-3xl md:text-3xl lg:text-3xl">Exclusive Discounts and Perks</h3>
-          <p class="2xl:text-lg text-gray-300">Enjoy special discounts on our products and services as
+          <h3 class="text-2xl 2xl:text-2xl xl:text-3xl md:text-3xl lg:text-3xl">Exclusive Discounts and Perks</h3>
+          <p class="2xl:text-md text-gray-300">Enjoy special discounts on our products and services as
             well as exclusive access to partner offerings.</p>
         </div>
-        <div class="border-2 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
+        <div
+            class="border-2 border-gray-500 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               width="75"
@@ -157,11 +157,12 @@
                 d="m23 12l-2.44-2.79l.34-3.69l-3.61-.82l-1.89-3.2L12 2.96L8.6 1.5L6.71 4.69L3.1 5.5l.34 3.7L1 12l2.44 2.79l-.34 3.7l3.61.82L8.6 22.5l3.4-1.47l3.4 1.46l1.89-3.19l3.61-.82l-.34-3.69zM9.38 16.01L7 13.61a.996.996 0 0 1 0-1.41l.07-.07c.39-.39 1.03-.39 1.42 0l1.61 1.62l5.15-5.16c.39-.39 1.03-.39 1.42 0l.07.07c.39.39.39 1.02 0 1.41l-5.92 5.94c-.41.39-1.04.39-1.44 0"
             />
           </svg>
-          <h3 class="text-2xl 2xl:text-3xl xl:text-3xl md:text-3xl lg:text-3xl">Member Only Resources</h3>
-          <p class="2xl:text-lg text-gray-300">Get access to a wealth of resources, including tools,
+          <h3 class="text-2xl 2xl:text-2xl xl:text-3xl md:text-3xl lg:text-3xl">Member Only Resources</h3>
+          <p class="2xl:text-md text-gray-300">Get access to a wealth of resources, including tools,
             templates and downloadable content.</p>
         </div>
-        <div class="border-2 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
+        <div
+            class="border-2 border-gray-500 bg-black text-white 2xl:p-8 rounded-lg flex flex-col space-y-2 text-center items-center">
           <svg
               xmlns="http://www.w3.org/2000/svg"
               width="75"
@@ -174,34 +175,36 @@
                 d="M10 3v1.97l7 5V11h2v2h-2v2h2v2h-2v4h6V3zm9 6h-2V7h2z"
             />
           </svg>
-          <h3 class="text-2xl 2xl:text-3xl xl:text-3xl md:text-3xl lg:text-3xl">Access to Co-working Space</h3>
-          <p class="2xl:text-lg text-gray-300">Exclusive access to state of the art co-working
+          <h3 class="text-2xl 2xl:text-2xl xl:text-3xl md:text-3xl lg:text-3xl">Access to Co-working Space</h3>
+          <p class="2xl:text-md text-gray-300">Exclusive access to state of the art co-working
             space located at our headquarters.</p>
         </div>
       </div>
 
-      <div class="text-center flex flex-col space-y-4 justify-center items-center my-10">
+    </div>
+
+    <div class="text-center flex flex-col space-y-4 justify-center items-center my-10 bt-backdrop p-10 w-3/4 mx-auto">
+      <div class="bg-black px-5 py-2 w-fit mx-auto">
         <h3 class="text-gray-200 2xl:text-2xl text-xl">Join Our Exclusive Membership Today</h3>
-        <div class="flex flex-row space-x-2">
-          <a href="https://buy.stripe.com/9AQ8zZ0itfEia7S6ot">
-            <button class="bg-primary px-5 py-2 px-2 rounded-md text-xl text-white 2xl:px-10 hover:bg-blue-600">
-              Monthly
-            </button>
-          </a>
-
-          <a href="https://buy.stripe.com/cN22bB3uFeAe4NycMS">
-            <button class="bg-primary px-5 py-2 px-2 rounded-md text-xl text-white w-full 2xl:px-10 hover:bg-blue-600">
-              Annual
-            </button>
-          </a>
-        </div>
       </div>
+      <div class="flex flex-row space-x-2">
+        <a href="https://buy.stripe.com/9AQ8zZ0itfEia7S6ot">
+          <button class="bg-primary px-5 py-2 px-2 rounded-md text-xl text-white 2xl:px-10 hover:bg-blue-600">
+            Monthly
+          </button>
+        </a>
 
-      <div class="my-10 text-center">
-        <img src="public/imgs/btr.svg" class="w-32"/>
-        <small class="text-gray-500">&copy; 2024. Black Tech Talent</small>
+        <a href="https://buy.stripe.com/cN22bB3uFeAe4NycMS">
+          <button class="bg-primary px-5 py-2 px-2 rounded-md text-xl text-white w-full 2xl:px-10 hover:bg-blue-600">
+            Annual
+          </button>
+        </a>
       </div>
+    </div>
 
+    <div class="my-10 text-center w-3/4 mx-auto flex flex-col items-center">
+      <img src="public/imgs/btr.svg" class="w-32"/>
+      <small class="text-gray-500">&copy; 2024. Black Tech Talent</small>
     </div>
 
   </div>
@@ -217,6 +220,12 @@ definePageMeta({
 <style scoped>
 .video-backdrop {
   background-image: url('/imgs/backdrop.png');
+  background-position: center center;
+  background-size: cover
+}
+
+.bt-backdrop {
+  background-image: url('/imgs/bg-b.png');
   background-position: center center;
   background-size: cover
 }
