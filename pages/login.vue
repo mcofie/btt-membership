@@ -55,6 +55,7 @@
 
 <script lang="ts" setup>
 import {signIn} from "next-auth/react";
+
 const snackbar = useSnackbar();
 
 const loginType = ref('sign-up')
@@ -93,17 +94,31 @@ const setLoginType = () => {
 }
 
 const mySignInHandler = async ({email, password}: { email: string, password: string }) => {
-  if(loginType.value === ''){
+  if (loginType.value === 'sign-up') {
+    if (login.value.password === login.value.passwordTwo) {
+      const {error, url} = await signIn('credentials', {email, password, redirect: false})
+      if (error) {
+        snackbar.add({
+          type: 'error',
+          text: 'Sorry! Authentication failed'
+        })
+      } else {
+        return navigateTo(url, {external: true})
+      }
+    } else {
+      snackbar.add({
+        type: 'error',
+        text: 'Passwords are not the same'
+      })
+    }
+  } else {
     const {error, url} = await signIn('credentials', {email, password, redirect: false})
     if (error) {
-      // Do your custom error handling here
-      console.log(error)
       snackbar.add({
         type: 'error',
         text: 'Sorry! Authentication failed'
       })
     } else {
-      // No error, continue with the sign in, e.g., by following the returned redirect:
       return navigateTo(url, {external: true})
     }
   }
