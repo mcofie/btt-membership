@@ -20,19 +20,27 @@
       />
     </div>
 
-    <div class="grid grid-cols-2 gap-4 mt-7" v-if="!isPending">
-      <NuxtLink :to="`/events/${event.id}`" v-if="evnts.length !== 0" v-for="event in evnts">
-        <UCard class="w-full flex flex-col space-y-5">
-          <h1 class="text-4xl font-bold text-blue-600">{{ $dayjs(event.date_time).format('DD MMM') }}</h1>
-          <p class="text-lg font-medium my-2">{{ event.name }}</p>
-          <p class="text-md text-gray-500 mb-2">{{ event.description }}</p>
-          <div class="flex flex-row justify-start items-center mb-4">
-            <UIcon name="heroicons:map-pin-20-solid" class="text-2xl text-gray-500" dynamic/>
-            <p class="text-gray-500">{{ event.venue }}</p>
-          </div>
-          <div class="flex flex-row justify-start items-center space-x-2">
-            <UIcon name="heroicons:clock-solid" class="text-2xl text-gray-500" dynamic/>
-            <p class="text-gray-500">{{ $dayjs(event.date_time).format('HH:mm') }}</p>
+    <div class="grid grid-cols-2 gap-4 mt-7" v-if="!eventsResponse.pending && eventsResponse.status === 'success'">
+      <NuxtLink :to="`/events/${event.id}`" v-if="evnts.length !== 0"
+                v-for="event in evnts">
+        <UCard class="">
+          <div class="w-full flex flex-row justify-between items-start space-x-4">
+            <div class="bg-gray-200 p-2 min-h-20 items-start">
+              <img v-if="event.imageUrl !== null" :src="event.imageUrl" class="w-36"/>
+            </div>
+            <div class="w-full flex flex-col space-y-5">
+              <h1 class="text-4xl font-bold text-blue-600">{{ $dayjs(event.date_time).format('DD MMM') }}</h1>
+              <p class="text-lg font-medium my-2">{{ event.name }}</p>
+              <p class="text-md text-gray-500 mb-2">{{ event.description }}</p>
+              <div class="flex flex-row justify-start items-center mb-4">
+                <UIcon name="heroicons:map-pin-20-solid" class="text-2xl text-gray-500" dynamic/>
+                <p class="text-gray-500">{{ event.venue }}</p>
+              </div>
+              <div class="flex flex-row justify-start items-center space-x-2">
+                <UIcon name="heroicons:clock-solid" class="text-2xl text-gray-500" dynamic/>
+                <p class="text-gray-500">{{ $dayjs(event.date_time).format('HH:mm') }}</p>
+              </div>
+            </div>
           </div>
         </UCard>
       </NuxtLink>
@@ -46,9 +54,7 @@
 </template>
 
 <script lang="ts" setup>
-const supabase = useSupabaseClient()
 const evnts = ref([])
-const isPending = ref(true)
 const monthInYears = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const year = ref('2024')
 const month = ref('March')
@@ -63,43 +69,44 @@ watch(month, async (newMonth: string, oldMonth: string) => {
 })
 
 
-const getAllEvents = async () => {
-  let {data: events, error} = await supabase
-      .from('events')
-      .select('*')
-  evnts.value = events
+const eventsResponse = ref({
+  data: {}, pending: false, error: {}, status: false
+})
+
+const fetchEvents = async () => {
+  //Fetch all Products
+  eventsResponse.value = await useFetch('/api/v1/events', {
+    baseURL: 'http://147.182.186.55:9098'
+  })
+
+  evnts.value = eventsResponse.value.data.data.results
 }
 
 async function selectRowsByYear(year: string, month: string) {
 
-  const targetMonth = monthInYears.indexOf(month)
-
-  const targetYear = parseInt(year); // Change this to your desired year
-  const yearStart = new Date(targetYear, targetMonth, 1).toISOString(); // First day of the year
-  const yearEnd = new Date(targetYear, 11, 31, 23, 59, 59, 999).toISOString();
-  isPending.value = true
-
-  try {
-    const {data: events, error} = await supabase
-        .from('events')
-        .select('*')
-        .gte('date_time', yearStart) // Greater than or equal to the start of the year
-        .lte('date_time', yearEnd);
-    evnts.value = events
-    isPending.value = false
-  } catch (error) {
-    isPending.value = false
-    console.error('Error fetching rows:', error.message);
-  }
+  // const targetMonth = monthInYears.indexOf(month)
+  //
+  // const targetYear = parseInt(year); // Change this to your desired year
+  // const yearStart = new Date(targetYear, targetMonth, 1).toISOString(); // First day of the year
+  // const yearEnd = new Date(targetYear, 11, 31, 23, 59, 59, 999).toISOString();
+  // isPending.value = true
+  //
+  // try {
+  //   const {data: events, error} = await supabase
+  //       .from('events')
+  //       .select('*')
+  //       .gte('date_time', yearStart) // Greater than or equal to the start of the year
+  //       .lte('date_time', yearEnd);
+  //   evnts.value = events
+  //   isPending.value = false
+  // } catch (error) {
+  //   isPending.value = false
+  //   console.error('Error fetching rows:', error.message);
+  // }
 }
 
 onMounted(() => {
-  isPending.value = true
-  getAllEvents().then(data => {
-    isPending.value = false
-  }).catch(error => {
-    isPending.value = false
-  })
+  fetchEvents()
 })
 
 definePageMeta({

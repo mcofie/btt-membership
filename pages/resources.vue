@@ -1,9 +1,10 @@
 <template>
   <div class="grid grid-cols-6">
     <div class="col-span-2 border-r border-gray-200 dark:border-gray-800 p-5">
-      <p v-for="category in categories" class="py-2 cursor-pointer" v-if="!isCategory"
+      <p v-for="category in categories" class="py-2 cursor-pointer"
+         v-if="!resourceResponse.pending && resourceResponse.status === 'success'"
          :class="[selected === category.category ? 'text-blue-500 dark:bg-gray-800 dark:text-blue-500 bg-gray-100 p-2 rounded-lg font-medium' : '']"
-         @click="categorySelected(category.category)">
+         @click="categorySelected(category)">
         {{ category.category }}
       </p>
       <div v-else class="flex flex-col space-y-4">
@@ -46,7 +47,7 @@
               </a>
             </div>
 
-            <UModal  v-model="isOpen">
+            <UModal v-model="isOpen">
               <div class="p-4">
                 <vue-vimeo-player
                     video-id="916393160"
@@ -64,7 +65,7 @@
 </template>
 
 <script lang="ts" setup>
-const supabase = useSupabaseClient()
+
 const isCategory = ref(true)
 const isResource = ref(true)
 const resource = ref([])
@@ -72,6 +73,23 @@ const categories = ref([])
 const selected = ref('')
 const isOpen = ref(false)
 import {vueVimeoPlayer} from 'vue-vimeo-player'
+
+
+const resourceResponse = ref({
+  data: {}, pending: false, error: {}, status: false
+})
+
+const resResponse = ref({
+  data: {}, pending: false, error: {}, status: false
+})
+
+const fetchResources = async () => {
+  //Fetch all
+  resourceResponse.value = await useFetch('/api/v1/resource', {
+    baseURL: 'http://147.182.186.55:9098'
+  })
+  categories.value = getDistinctCategoriesAndIds(resourceResponse.value.data.data.results);
+}
 
 
 definePageMeta({
@@ -89,41 +107,56 @@ const items = [{
 }]
 
 
-const getAllCategories = async () => {
-  let {data: resources, error} = await supabase
-      .from('resources')
-      .select('category', {distinct: true})
-  categories.value = resources
-}
-
-const categorySelected = async (category: string) => {
-  selected.value = category
-
-  async function request() {
-    const {data: resources, error} = await supabase
-        .from('resources')
-        .select()
-        .eq('category', category)
-    resource.value = resources
-  }
-
-  isResource.value = true
-  request().then(data => {
-    isResource.value = false
-  }).catch(error => {
-    isResource.value = false
+const categorySelected = async (category: any) => {
+  // console.log(category)
+  // selected.value = category
+  //
+  resResponse.value = await useFetch(`/api/v1/resource/${category.id}`, {
+    baseURL: 'http://147.182.186.55:9098'
   })
 
+
+  console.log(resResponse.value.data.data)
+
+  // async function request() {
+  //   const {data: resources, error} = await supabase
+  //       .from('resources')
+  //       .select()
+  //       .eq('category', category)
+  //   resource.value = resources
+  // }
+  //
+  // isResource.value = true
+  // request().then(data => {
+  //   isResource.value = false
+  // }).catch(error => {
+  //   isResource.value = false
+  // })
+
 }
+
+
+const getDistinctCategoriesAndIds = (resources): { category: string, id: string }[] => {
+  const distinctItems: { category: string, id: string }[] = [];
+
+  resources.forEach(resource => {
+    if (!distinctItems.some(item => item.category === resource.category && item.id === resource.id)) {
+      distinctItems.push({category: resource.category, id: resource.id});
+    }
+  });
+
+  return distinctItems;
+};
 
 onMounted(() => {
-  isCategory.value = true
-  getAllCategories().then(data => {
-    categorySelected(categories.value[0].category)
-    isCategory.value = false
-  }).catch(error => {
-    isCategory.value = false
-  })
+  fetchResources()
+  // isCategory.value = true
+  // getAllCategories().then(data => {
+  //   // categorySelected(categories.value[0].category)
+  //   isCategory.value = false
+  // }).catch(error => {
+  //   isCategory.value = false
+  // })
 })
 
 

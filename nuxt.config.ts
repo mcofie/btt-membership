@@ -1,29 +1,36 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: {enabled: true},
-    modules: ['@nuxt/ui', '@nuxtjs/tailwindcss', '@nuxtjs/supabase', "@nuxt/fonts", 'dayjs-nuxt'],
+    modules: [
+        '@nuxt/ui',
+        '@nuxtjs/tailwindcss',
+        "@nuxt/fonts",
+        'dayjs-nuxt',
+        'nuxt-snackbar',
+        "@sidebase/nuxt-auth"
+    ],
     dayjs: {
         locales: ['en'],
         defaultLocale: 'en',
         plugins: ['relativeTime', 'advancedFormat'],
+    },
+    // routeRules: {
+    //     '/': {redirect: '/login'},
+    // },
+    auth: {
+        // origin: process.env.ORIGIN,
+        isEnabled: true,
+        globalAppMiddleware: true,
+        origin: 'http://147.182.186.55:9098',
+        endpoints: {
+            signIn: {path: '/login', method: 'post'},
+        }
     },
     fonts: {
         providers: {
             google: true,
         },
         priority: ['google'],
-    },
-    supabase: {
-        // Options
-        // Remove or comment out the auth configuration
-        auth: {
-            // Auth configuration options
-        },
-        redirectOptions: {
-            login: '/login',
-            callback: '/confirm',
-            exclude: ['/membership'],
-        }
     },
     css: ['~/assets/css/main.css'],
     postcss: {

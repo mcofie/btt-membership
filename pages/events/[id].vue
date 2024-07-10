@@ -1,10 +1,10 @@
 <template>
   <div class="w-full">
-    <div v-if="!isPending" class="flex flex-col mt-10">
+    <div v-if="!eventResponse.pending && eventResponse.status === 'success'" class="flex flex-col mt-10">
 
       <div class="flex flex-row">
         <div class="w-3/6 border dark:border-gray-800 border-gray-200 rounded-lg h-[520px]">
-          <object :data="event.image_url" :style="{height:'500px', objectFit:'contain'}" class="w-full z-10 p-5"/>
+          <object :data="event.imageUrl" :style="{height:'500px', objectFit:'contain'}" class="w-full z-10 p-5"/>
         </div>
         <div class="px-5 w-3/6 flex flex-col space-y-4">
           <UBreadcrumb
@@ -41,28 +41,26 @@ definePageMeta({
 })
 
 const route = useRoute()
-const supabase = useSupabaseClient()
 const id = route.params.id
 const isPending = ref(true)
 const event = ref({})
 
 
-const getEventItem = async () => {
-  const {data, error} = await supabase
-      .from('events')
-      .select()
-      .eq('id', id)
-  event.value = data[0]
+const eventResponse = ref({
+  data: {}, pending: false, error: {}, status: false
+})
+
+const fetchEvents = async () => {
+  //Fetch all Products
+  eventResponse.value = await useFetch(`/api/v1/events/${id}`, {
+    baseURL: 'http://147.182.186.55:9098'
+  })
+
+  event.value = eventResponse.value.data.data
 }
 
-
 onMounted(() => {
-  isPending.value = true
-  getEventItem().then(data => {
-    isPending.value = false
-  }).catch(error => {
-    isPending.value = false
-  })
+  fetchEvents()
 })
 
 

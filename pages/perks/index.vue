@@ -5,7 +5,8 @@
           class="bg-gradient-to-r from-purple-500 to-pink-500 h-[400px] w-full flex items-center rounded-2xl justify-center">
         <div class="p-5 flex flex-col items-center justify-center align-middle">
           <h2 class="text-5xl font-bold text-white dark:text-black">Save 15% On all Hoodies</h2>
-          <p class="my-2 text-white dark:text-black">Use code <span class="font-bold underline decoration-wavy">‘Hoodie15’</span> at
+          <p class="my-2 text-white dark:text-black">Use code <span class="font-bold underline decoration-wavy">‘Hoodie15’</span>
+            at
             Checkout</p>
         </div>
       </div>
@@ -26,12 +27,12 @@
 
       </div>
 
-      <div class="grid grid-cols-3 gap-4 mt-5" v-if="!isPerksPending">
+      <div class="grid grid-cols-3 gap-4 mt-5" v-if="!perksResponse.pending && perksResponse.status === 'success'">
         <NuxtLink v-for="(perk,index) in prks" :to="`/perks/${perk.id}`">
           <UCard class="w-full p-0">
-            <object :data="perk.image_url" :style="{height:'300px', objectFit:'contain'}" class="w-full z-10"/>
+            <object :data="perk.imageUrl" :style="{height:'300px', objectFit:'contain'}" class="w-full z-10"/>
             <div class="z-20 w-full bg-gray-50 dark:bg-gray-800 rounded-lg p-5">
-              <p class="text-xl font-bond">{{ perk.product_name }}</p>
+              <p class="text-xl font-bond">{{ perk.productName }}</p>
               <p class="text-sm">${{ perk.price }}</p>
             </div>
           </UCard>
@@ -47,68 +48,33 @@
 </template>
 
 <script lang="ts" setup>
-const supabase = useSupabaseClient()
+// const supabase = useSupabaseClient()
 const isPerksPending = ref(true)
 const prks = ref([])
 const gender = ref('Men')
 const category = ref('Hoodies')
 
 definePageMeta({
-  layout: 'main'
+  layout: 'main',
+  middleware: 'auth'
 })
 
-watch(gender, async (newGender: string, oldGender: string) => {
-  await getAllPerksSex(newGender)
+const perksResponse = ref({
+  data: {}, pending: false, error: {}, status: false
 })
 
-watch(category, async (newCategory: string, oldCategory: string) => {
-  await getAllPerksType(newCategory)
-})
+const perksResources = async () => {
+  //Fetch all Products
+  perksResponse.value = await useFetch('/api/v1/perk', {
+    baseURL: 'http://147.182.186.55:9098'
+  })
 
+  prks.value = perksResponse.value.data.data.results
 
-const getAllPerks = async () => {
-  isPerksPending.value = true
-  try {
-    const {data: perks, error} = await supabase
-        .from('perks')
-        .select('*')
-    prks.value = perks
-    isPerksPending.value = false
-  } catch (e) {
-    isPerksPending.value = false
-  }
-}
-
-const getAllPerksType = async (category: string) => {
-  isPerksPending.value = true
-  try {
-    const {data: perks, error} = await supabase
-        .from('perks')
-        .select('*')
-        .eq('type', category.toLowerCase())
-    prks.value = perks
-    isPerksPending.value = false
-  } catch (e) {
-    isPerksPending.value = false
-  }
-}
-
-const getAllPerksSex = async (gender: string) => {
-  isPerksPending.value = true
-  try {
-    const {data: perks, error} = await supabase
-        .from('perks')
-        .select('*')
-        .eq('sex', gender.toLowerCase())
-    prks.value = perks
-    isPerksPending.value = false
-  } catch (e) {
-    isPerksPending.value = false
-  }
 }
 
 onMounted(() => {
-  getAllPerks()
+  perksResources()
 })
 
 const items = ['Shirts', "Hoodies,Pants & Shorts", "Accessories", "Jackets", "Bags"]

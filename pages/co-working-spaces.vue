@@ -49,7 +49,6 @@ const sendingBookings = ref(false)
 const toast = useToast()
 
 
-const supabase = useSupabaseClient()
 
 const date = ref(new Date())
 const booking = ref({} as IBooking)
@@ -85,28 +84,28 @@ const amenities = [
   },
 ];
 
-const makeBooking = async () => {
-  sendingBookings.value = true
-  try {
-    const {data, error} = await supabase
-        .from('booking')
-        .insert([
-          {
-            firstname: booking.value.firstName,
-            lastname: booking.value.lastName,
-            phone: booking.value.phone,
-            email: booking.value.email,
-            date: date.value
-          },
-        ])
-        .select()
-    sendingBookings.value = false
-    toast.add({title: 'Booking successfully added'})
-    booking.value = ({} as IBooking)
-  } catch (e) {
-    sendingBookings.value = false
-  }
-}
+// const makeBooking = async () => {
+//   sendingBookings.value = true
+//   try {
+//     const {data, error} = await supabase
+//         .from('booking')
+//         .insert([
+//           {
+//             firstname: booking.value.firstName,
+//             lastname: booking.value.lastName,
+//             phone: booking.value.phone,
+//             email: booking.value.email,
+//             date: date.value
+//           },
+//         ])
+//         .select()
+//     sendingBookings.value = false
+//     toast.add({title: 'Booking successfully added'})
+//     booking.value = ({} as IBooking)
+//   } catch (e) {
+//     sendingBookings.value = false
+//   }
+// }
 
 
 interface IBooking {

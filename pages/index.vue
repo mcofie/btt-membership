@@ -99,33 +99,33 @@ const isDark = computed({
     colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
   }
 })
-const supabase = useSupabaseClient()
+// const supabase = useSupabaseClient()
 const toast = useToast()
 const sendingFeedback = ref(false)
 const feedback = ref({} as IFeedback)
 
-const sendFeedback = async () => {
-  sendingFeedback.value = true
-  try {
-    const {data, error} = await supabase
-        .from('feedback')
-        .insert([
-          {
-            firstname: feedback.value.firstName,
-            lastname: feedback.value.lastName,
-            phone: feedback.value.phoneNumber,
-            email: feedback.value.email,
-            message: feedback.value.message
-          },
-        ])
-        .select()
-    sendingFeedback.value = false
-    toast.add({title: 'Feedback successfully sent'})
-    feedback.value = ({} as IFeedback)
-  } catch (e) {
-    sendingFeedback.value = false
-  }
-}
+// const sendFeedback = async () => {
+//   sendingFeedback.value = true
+//   try {
+//     const {data, error} = await supabase
+//         .from('feedback')
+//         .insert([
+//           {
+//             firstname: feedback.value.firstName,
+//             lastname: feedback.value.lastName,
+//             phone: feedback.value.phoneNumber,
+//             email: feedback.value.email,
+//             message: feedback.value.message
+//           },
+//         ])
+//         .select()
+//     sendingFeedback.value = false
+//     toast.add({title: 'Feedback successfully sent'})
+//     feedback.value = ({} as IFeedback)
+//   } catch (e) {
+//     sendingFeedback.value = false
+//   }
+// }
 
 interface IFeedback {
   firstName: string

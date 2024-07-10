@@ -89,10 +89,10 @@
 </template>
 
 <script lang="ts" setup>
-const supabase = useSupabaseClient()
+// const supabase = useSupabaseClient()
 const userDetails = ref({})
 const isUserLoading = ref(true)
-const {data} = await supabase.auth.getSession()
+// const {data} = await supabase.auth.getSession()
 const avatarUrl = ref('')
 const email = ref('')
 
@@ -113,27 +113,25 @@ onMounted(async () => {
 })
 
 const getUser = async () => {
-  console.log((await supabase.auth.getUser()).data.user)
-
-  avatarUrl.value = (await supabase.auth.getUser()).data.user?.user_metadata?.avatar_url
-  email.value = (await supabase.auth.getUser()).data.user?.email
-
-  isUserLoading.value = true
-  const {data: {user}} = await supabase.auth.getUser().then(data => {
-    userDetails.value = user
-    isUserLoading.value = false
-
-    console.log(user)
-
-  }).catch(error => {
-    isUserLoading.value = false
-  })
+  // console.log((await supabase.auth.getUser()).data.user)
+  //
+  // avatarUrl.value = (await supabase.auth.getUser()).data.user?.user_metadata?.avatar_url
+  // email.value = (await supabase.auth.getUser()).data.user?.email
+  //
+  // isUserLoading.value = true
+  // const {data: {user}} = await supabase.auth.getUser().then(data => {
+  //   userDetails.value = user
+  //   isUserLoading.value = false
+  //
+  //   console.log(user)
+  //
+  // }).catch(error => {
+  //   isUserLoading.value = false
+  // })
 
 }
+const {data, signIn, signOut, getSession, status} = useAuth()
 
-const signOut = async () => {
-  const {error} = await supabase.auth.signOut()
-}
 
 const items = [
   [{

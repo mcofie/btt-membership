@@ -1,21 +1,21 @@
 <template>
   <div class="w-full">
-    <div v-if="!isPending" class="flex flex-col mt-10">
+    <div v-if="!perksResponse.pending && perksResponse.status === 'success'" class="flex flex-col mt-10">
 
       <div class="flex flex-row">
         <div class="w-3/6 border border-gray-200 dark:border-gray-800 rounded-lg h-[520px]">
-          <object :data="perk.image_url" :style="{height:'500px', objectFit:'contain'}" class="w-full z-10 p-5"/>
+          <object :data="perk.imageUrl" :style="{height:'500px', objectFit:'contain'}" class="w-full z-10 p-5"/>
         </div>
         <div class="px-5 w-3/6 flex flex-col space-y-4">
           <UBreadcrumb
               divider="/"
-              :links="[{ label: 'Home', to: '/' }, { label: 'Perks', to:'/perks' }, { label: `${perk.product_name}` }]"
+              :links="[{ label: 'Home', to: '/' }, { label: 'Perks', to:'/perks' }, { label: `${perk.productName}` }]"
           />
-          <h3 class="my-5 text-4xl">{{ perk.product_name }}</h3>
+          <h3 class="my-5 text-4xl">{{ perk.productName }}</h3>
           <h3 class="my-1 text-2xl">${{ perk.price }}</h3>
           <p>{{ perk.details }}</p>
           <div class="w-2/3 mt-3">
-            <a :href="perk.payment_link" target="_blank">
+            <a :href="perk.paymentLink" target="_blank">
               <UButton class="text-center px-5" size="xl">Buy now</UButton>
             </a>
           </div>
@@ -40,7 +40,6 @@
 <script lang="ts" setup>
 const router = useRouter()
 const route = useRoute()
-const supabase = useSupabaseClient()
 const isPending = ref(true)
 const perk = ref({})
 const id = route.params.id
@@ -49,22 +48,21 @@ definePageMeta({
   layout: 'main'
 })
 
-const getPerkItem = async () => {
+const perksResponse = ref({
+  data: {}, pending: false, error: {}, status: false
+})
 
-  const {data, error} = await supabase
-      .from('perks')
-      .select()
-      .eq('id', id)
-  perk.value = data[0]
+const perksResources = async () => {
+  perksResponse.value = await useFetch(`/api/v1/perk/${id}`, {
+    baseURL: 'http://147.182.186.55:9098'
+  })
+
+  perk.value = perksResponse.value.data.data
 }
 
+
 onMounted(() => {
-  isPending.value = true
-  getPerkItem().then(data => {
-    isPending.value = false
-  }).catch(error => {
-    isPending.value = false
-  })
+  perksResources()
 })
 
 

@@ -3,6 +3,7 @@
     <NuxtPage/>
     <UNotifications/>
   </NuxtLayout>
+  <NuxtSnackbar />
 </template>
 <style scoped>
 div {
