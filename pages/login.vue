@@ -17,7 +17,7 @@
           <UInput size="xl" v-model="login.password" type="password"/>
         </UFormGroup>
 
-        <UFormGroup label="Re-enter Password" name="password">
+        <UFormGroup label="Re-enter Password" name="password" v-if="loginType === 'sign-up'">
           <UInput size="xl" v-model="login.passwordTwo" type="password"/>
         </UFormGroup>
 
@@ -27,13 +27,15 @@
               size="md"
               color="primary"
               variant="solid"
-              label="Sign Up"
+              :label="loginType === 'sign-up' ? 'Sign Up' : 'Login' "
               :trailing="false"
               @click="mySignInHandler({email:login.email, password:login.password})"
           />
         </div>
 
-        <p>Have an account already?<span class="text-blue-500"> Login</span></p>
+        <p>Have an account already?<span class="text-blue-500 cursor-pointer" @click="setLoginType()"> {{
+            loginType === 'sign-up' ? ' Login' : ' Sign Up'
+          }}</span></p>
       </div>
 
 
@@ -53,6 +55,9 @@
 
 <script lang="ts" setup>
 import {signIn} from "next-auth/react";
+const snackbar = useSnackbar();
+
+const loginType = ref('sign-up')
 
 const colorMode = useColorMode()
 const isDark = computed({
@@ -79,23 +84,28 @@ definePageMeta({
   }
 })
 
-// definePageMeta({
-//   auth: {
-//     unauthenticatedOnly: true,
-//   }
-// })
+const setLoginType = () => {
+  if (loginType.value === 'sign-up') {
+    loginType.value = 'login'
+  } else {
+    loginType.value = 'sign-up'
+  }
+}
 
 const mySignInHandler = async ({email, password}: { email: string, password: string }) => {
-  const {error, url} = await signIn('credentials', {email, password, redirect: false})
-  if (error) {
-    // Do your custom error handling here
-    // snackbar.add({
-    //   type: 'error',
-    //   text: 'Sorry! Authentication failed'
-    // })
-  } else {
-    // No error, continue with the sign in, e.g., by following the returned redirect:
-    return navigateTo(url, {external: true})
+  if(loginType.value === ''){
+    const {error, url} = await signIn('credentials', {email, password, redirect: false})
+    if (error) {
+      // Do your custom error handling here
+      console.log(error)
+      snackbar.add({
+        type: 'error',
+        text: 'Sorry! Authentication failed'
+      })
+    } else {
+      // No error, continue with the sign in, e.g., by following the returned redirect:
+      return navigateTo(url, {external: true})
+    }
   }
 }
 

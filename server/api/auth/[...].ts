@@ -10,8 +10,6 @@ export default NuxtAuthHandler({
     secret: '679D6A5F47765D7ED',
     pages: {
         signIn: '/login',
-       // signIn: '/login',
-        // signOut: '/login',
     },
     providers: [
         CredentialsProvider.default({
