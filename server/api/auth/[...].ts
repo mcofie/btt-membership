@@ -29,7 +29,7 @@ export default NuxtAuthHandler({
                     headers: {
                         'Accept': 'application/json',
                     },
-                    baseURL: "http://147.182.186.55:9098/api/v1/",
+                    baseURL: "https://api-membership.blacktechtalent.org/api/v1/",
                 })
 
                 if (data) {

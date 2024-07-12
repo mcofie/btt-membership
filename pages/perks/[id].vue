@@ -54,7 +54,7 @@ const perksResponse = ref({
 
 const perksResources = async () => {
   perksResponse.value = await useFetch(`/api/v1/perk/${id}`, {
-    baseURL: 'http://147.182.186.55:9098'
+    baseURL: 'https://api-membership.blacktechtalent.org'
   })
 
   perk.value = perksResponse.value.data.data

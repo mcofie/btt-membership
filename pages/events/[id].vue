@@ -53,7 +53,7 @@ const eventResponse = ref({
 const fetchEvents = async () => {
   //Fetch all Products
   eventResponse.value = await useFetch(`/api/v1/events/${id}`, {
-    baseURL: 'http://147.182.186.55:9098'
+    baseURL: 'https://api-membership.blacktechtalent.org'
   })
 
   event.value = eventResponse.value.data.data

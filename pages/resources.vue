@@ -112,7 +112,7 @@ const categorySelected = async (category: any) => {
   // selected.value = category
   //
   resResponse.value = await useFetch(`/api/v1/resource/${category.id}`, {
-    baseURL: 'http://147.182.186.55:9098'
+    baseURL: 'https://api-membership.blacktechtalent.org'
   })
 
 

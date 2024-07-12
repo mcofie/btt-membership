@@ -66,7 +66,7 @@ const perksResponse = ref({
 const perksResources = async () => {
   //Fetch all Products
   perksResponse.value = await useFetch('/api/v1/perk', {
-    baseURL: 'http://147.182.186.55:9098'
+    baseURL: 'https://api-membership.blacktechtalent.org'
   })
 
   prks.value = perksResponse.value.data.data.results
